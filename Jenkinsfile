@@ -3,16 +3,19 @@ pipeline{
 	stages{
 		stage("Grid Init"){
 			steps{
-				sh "docker-compose up -d hub chrome firefox"
+				sh "docker-compose up --no-color -d hub chrome firefox"
 				}
 			}
 		stage('Test Execution'){
 			steps{
-				sh "docker-compose up search-module.xml book-flight-module.xml"		
+				sh "docker-compose up search-module book-flight"		
 				}
 			}
-	post(){
-
+	post{
+		always{
+			archiveArtifacts artifacts: 'output/**'
+			sh "docker-compose down"
+		}
 		}
 	}
 }
