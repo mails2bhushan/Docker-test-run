@@ -1,13 +1,17 @@
 pipeline{
 	agent any
 	stages{
-		stage("grid init"){
-		steps{
-
-			sh "docker-compose up -d hub chrome firefox"
+		stage("Grid Init"){
+			steps{
+				sh "docker-compose up -d hub chrome firefox"
+				}
 			}
-		}
-		stage(){
+		stage('Test Execution'){
+			steps{
+				sh "docker-compose up search-module.xml book-flight-module.xml"		
+				}
+			}
+	post(){
 
 		}
 	}
