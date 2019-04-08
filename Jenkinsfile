@@ -11,6 +11,7 @@ pipeline{
 				sh "docker-compose up search-module book-flight"		
 				}
 			}
+	}
 		post{
 			always{
 				archiveArtifacts artifacts: 'output/**'
@@ -18,4 +19,4 @@ pipeline{
 				}
 			}
 	}
-}
+
